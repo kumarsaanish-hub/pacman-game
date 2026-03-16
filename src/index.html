@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pac-Man</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      #game-container { position: relative; }
+      #game-canvas { display: block; border: 2px solid #00f; }
+      #error-message {
+        display: none;
+        color: #fff;
+        font-family: monospace;
+        font-size: 18px;
+        text-align: center;
+        padding: 20px;
+      }
+      #sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        min-width: 150px;
+      }
+      #difficulty {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      #difficulty h2 {
+        color: #FFD700;
+        font-family: monospace;
+        font-size: 13px;
+        letter-spacing: 1px;
+        margin-bottom: 4px;
+      }
+      .diff-btn {
+        background: #111;
+        color: #aaa;
+        border: 1px solid #333;
+        font-family: monospace;
+        font-size: 13px;
+        padding: 6px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+        text-align: left;
+      }
+      .diff-btn:hover { border-color: #FFD700; color: #fff; }
+      .diff-btn.active { border-color: #FFD700; color: #FFD700; background: #1a1a00; }
+      #pause-btn {
+        width: 100%;
+        background: #111;
+        color: #FFD700;
+        border: 1px solid #FFD700;
+        font-family: monospace;
+        font-size: 14px;
+        padding: 8px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+      #pause-btn:hover { background: #1a1a00; }
+      #leaderboard { color: #fff; font-family: monospace; }
+      #leaderboard-title {
+        color: #FFD700;
+        font-size: 13px;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+      }
+      #leaderboard ol { padding-left: 20px; font-size: 14px; line-height: 2; }
+      #leaderboard li { color: #fff; }
+      #leaderboard li.gold   { color: #FFD700; }
+      #leaderboard li.silver { color: #C0C0C0; }
+      #leaderboard li.bronze { color: #CD7F32; }
+    </style>
+  </head>
+  <body>
+    <div id="game-container">
+      <canvas id="game-canvas" width="560" height="620"></canvas>
+      <div id="error-message">
+        Canvas is not supported in your browser. Please use a modern browser to play.
+      </div>
+    </div>
+    <div id="sidebar">
+      <div id="difficulty">
+        <h2>DIFFICULTY</h2>
+        <button class="diff-btn" data-diff="EASY">🟢 Easy</button>
+        <button class="diff-btn active" data-diff="MEDIUM">🟡 Medium</button>
+        <button class="diff-btn" data-diff="HARD">🔴 Hard</button>
+        <button class="diff-btn" data-diff="VERY_HARD">🟣 Very Hard</button>
+      </div>
+      <div id="pause-section">
+        <button id="pause-btn">⏸ Pause</button>
+      </div>
+      <div id="leaderboard">
+        <div id="leaderboard-title">HIGH SCORES (Medium)</div>
+        <ol id="scores-list"></ol>
+      </div>
+    </div>
+    <script type="module" src="/main.ts"></script>
+  </body>
+</html>
