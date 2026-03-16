@@ -465,9 +465,10 @@ export class Game {
   /** Picks a random fruit based on rarity weights. */
   private _pickFruit(): { points: number; emoji: string } {
     const roll = Math.random();
-    if (roll < 0.70) return { points: 100, emoji: '🍒' }; // cherry — common
-    if (roll < 0.90) return { points: 200, emoji: '🍊' }; // orange — rare
-    return { points: 500, emoji: '🍋' };                   // lemon  — very rare
+    if (roll < 0.60) return { points: 100, emoji: '🍒' }; // cherry — common
+    if (roll < 0.80) return { points: 200, emoji: '🍊' }; // orange — rare
+    if (roll < 0.93) return { points: 500, emoji: '🍋' }; // lemon  — very rare
+    return { points: 800, emoji: '🍈' };                   // lime   — ultra rare
   }
 
 }

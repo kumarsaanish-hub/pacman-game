@@ -48,17 +48,46 @@ export class Renderer {
       const fx = state.fruit.tile.col * TILE_SIZE + TILE_SIZE / 2;
       const fy = state.fruit.tile.row * TILE_SIZE + TILE_SIZE / 2;
 
-      // Glow effect
-      const glowColor = state.fruit.emoji === '🍒' ? '#ff4466'
-                      : state.fruit.emoji === '🍊' ? '#ff8800'
-                      : '#ffee00';
       ctx.save();
-      ctx.shadowColor = glowColor;
-      ctx.shadowBlur = 14;
-      ctx.font = `${TILE_SIZE * 1.4}px serif`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(state.fruit.emoji, fx, fy);
+
+      if (state.fruit.emoji === '🍈') {
+        // Custom lime drawing
+        const r = TILE_SIZE * 0.65;
+        ctx.shadowColor = '#00ff44';
+        ctx.shadowBlur = 14;
+        // Outer green circle
+        ctx.fillStyle = '#32cd32';
+        ctx.beginPath();
+        ctx.arc(fx, fy, r, 0, Math.PI * 2);
+        ctx.fill();
+        // Inner lighter circle
+        ctx.fillStyle = '#7fff00';
+        ctx.beginPath();
+        ctx.arc(fx - r * 0.15, fy - r * 0.15, r * 0.55, 0, Math.PI * 2);
+        ctx.fill();
+        // Slice lines
+        ctx.strokeStyle = '#228b22';
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 6; i++) {
+          const angle = (i / 6) * Math.PI * 2;
+          ctx.beginPath();
+          ctx.moveTo(fx, fy);
+          ctx.lineTo(fx + Math.cos(angle) * r, fy + Math.sin(angle) * r);
+          ctx.stroke();
+        }
+      } else {
+        // Emoji fruits
+        const glowColor = state.fruit.emoji === '🍒' ? '#ff4466'
+                        : state.fruit.emoji === '🍊' ? '#ff8800'
+                        : '#ffee00';
+        ctx.shadowColor = glowColor;
+        ctx.shadowBlur = 14;
+        ctx.font = `${TILE_SIZE * 1.4}px serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(state.fruit.emoji, fx, fy);
+      }
+
       ctx.restore();
     }
 
